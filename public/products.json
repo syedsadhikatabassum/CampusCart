@@ -1,0 +1,437 @@
+[
+  {
+    "id": "gel-pens",
+    "name": "Gel Pens (Set of 5)",
+    "category": "writing-tools",
+    "price": 199,
+    "mrp": 249,
+    "rating": 4.8,
+    "reviews": 120,
+    "badge": "bestseller",
+    "featured": true,
+    "stock": 42,
+    "tags": [
+      "pens",
+      "gel",
+      "writing",
+      "colour"
+    ],
+    "image": "/images/gel-pens.jpg",
+    "description": "Smooth 0.5 mm gel pens in five campus colours. The ink dries quickly, so notes stay clean even when you close the book in a hurry."
+  },
+  {
+    "id": "spiral-notebook",
+    "name": "Spiral Notebook",
+    "category": "notebooks",
+    "price": 149,
+    "mrp": 199,
+    "rating": 4.7,
+    "reviews": 98,
+    "badge": "top",
+    "featured": true,
+    "stock": 56,
+    "tags": [
+      "notebook",
+      "spiral",
+      "ruled",
+      "class notes"
+    ],
+    "image": "/images/spiral-notebook.jpg",
+    "description": "A 160-page ruled spiral notebook with a firm cover. It lies flat on a desk, which makes long lectures easier to follow."
+  },
+  {
+    "id": "scientific-calculator",
+    "name": "Scientific Calculator",
+    "category": "calculators",
+    "price": 899,
+    "mrp": 1199,
+    "rating": 4.6,
+    "reviews": 87,
+    "badge": "popular",
+    "featured": true,
+    "stock": 24,
+    "tags": [
+      "calculator",
+      "scientific",
+      "exam",
+      "maths"
+    ],
+    "image": "/images/scientific-calculator.jpg",
+    "description": "A non-programmable scientific calculator for class tests and board exams. Fractions, trigonometry and statistics are one key away."
+  },
+  {
+    "id": "file-folders",
+    "name": "File Folders (Pack of 5)",
+    "category": "files-folders",
+    "price": 249,
+    "mrp": 349,
+    "rating": 4.5,
+    "reviews": 64,
+    "badge": "",
+    "featured": true,
+    "stock": 38,
+    "tags": [
+      "folders",
+      "files",
+      "assignments"
+    ],
+    "image": "/images/file-folders.jpg",
+    "description": "Five sturdy A4 folders for assignments, printouts and lab sheets. Colour-code a subject and stop digging through a loose stack."
+  },
+  {
+    "id": "highlighters",
+    "name": "Highlighters (Set of 4)",
+    "category": "writing-tools",
+    "price": 179,
+    "mrp": 229,
+    "rating": 4.6,
+    "reviews": 72,
+    "badge": "",
+    "featured": true,
+    "stock": 47,
+    "tags": [
+      "highlighters",
+      "markers",
+      "revision"
+    ],
+    "image": "/images/highlighters.jpg",
+    "description": "Chisel-tip highlighters in four soft shades that do not bleed through textbook paper. Useful for revision maps and formula boxes."
+  },
+  {
+    "id": "lab-record",
+    "name": "Lab Record Book",
+    "category": "lab-records",
+    "price": 129,
+    "mrp": 179,
+    "rating": 4.7,
+    "reviews": 95,
+    "badge": "",
+    "featured": true,
+    "stock": 60,
+    "tags": [
+      "lab",
+      "record",
+      "practical",
+      "science"
+    ],
+    "image": "/images/lab-record.jpg",
+    "description": "A bound practical record with index pages, observation tables and blank sheets for diagrams. Made for physics, chemistry and biology labs."
+  },
+  {
+    "id": "drawing-kit",
+    "name": "Drawing Kit",
+    "category": "art-craft",
+    "price": 299,
+    "mrp": 399,
+    "rating": 4.4,
+    "reviews": 58,
+    "badge": "",
+    "featured": true,
+    "stock": 31,
+    "tags": [
+      "drawing",
+      "geometry",
+      "art",
+      "compass"
+    ],
+    "image": "/images/drawing-kit.jpg",
+    "description": "Pencils, ruler, compass and eraser in one kit for engineering graphics and art class. The case keeps the small pieces together."
+  },
+  {
+    "id": "sticky-notes",
+    "name": "Sticky Notes (Pack of 6)",
+    "category": "accessories",
+    "price": 99,
+    "mrp": 149,
+    "rating": 4.5,
+    "reviews": 66,
+    "badge": "",
+    "featured": true,
+    "stock": 80,
+    "tags": [
+      "sticky notes",
+      "pads",
+      "reminders"
+    ],
+    "image": "/images/sticky-notes.jpg",
+    "description": "Six pads of repositionable notes for formulas, to-do lists and page markers. They lift cleanly off most textbook pages."
+  },
+  {
+    "id": "hb-pencils",
+    "name": "HB Pencils (Pack of 12)",
+    "category": "writing-tools",
+    "price": 79,
+    "mrp": 99,
+    "rating": 4.6,
+    "reviews": 140,
+    "badge": "",
+    "featured": false,
+    "stock": 90,
+    "tags": [
+      "pencils",
+      "hb",
+      "exam",
+      "writing"
+    ],
+    "image": "/images/hb-pencils.jpg",
+    "description": "A dozen bonded HB pencils with a clean graphite core. They sharpen evenly and suit both classwork and bubble-sheet exams."
+  },
+  {
+    "id": "watercolour-set",
+    "name": "Watercolour Set",
+    "category": "art-craft",
+    "price": 349,
+    "mrp": 449,
+    "rating": 4.5,
+    "reviews": 41,
+    "badge": "",
+    "featured": false,
+    "stock": 22,
+    "tags": [
+      "watercolour",
+      "paint",
+      "art",
+      "brush"
+    ],
+    "image": "/images/watercolour-set.jpg",
+    "description": "Twelve watercolour cakes with a round brush for posters, charts and art portfolios. Colours mix cleanly on ordinary cartridge paper."
+  },
+  {
+    "id": "geometry-box",
+    "name": "Geometry Box",
+    "category": "accessories",
+    "price": 189,
+    "mrp": 249,
+    "rating": 4.4,
+    "reviews": 77,
+    "badge": "",
+    "featured": false,
+    "stock": 44,
+    "tags": [
+      "geometry",
+      "compass",
+      "ruler",
+      "protractor"
+    ],
+    "image": "/images/geometry-box.jpg",
+    "description": "Compass, divider, set squares, protractor and pencil in a hinged metal box. The latch keeps everything in the bag between periods."
+  },
+  {
+    "id": "campus-backpack",
+    "name": "Campus Backpack",
+    "category": "accessories",
+    "price": 1299,
+    "mrp": 1699,
+    "rating": 4.8,
+    "reviews": 210,
+    "badge": "bestseller",
+    "featured": false,
+    "stock": 18,
+    "tags": [
+      "bag",
+      "backpack",
+      "college"
+    ],
+    "image": "/images/campus-backpack.jpg",
+    "description": "A padded laptop sleeve, bottle pocket and room for a full day's books. The back panel is cushioned for the walk between blocks."
+  },
+  {
+    "id": "a4-binders",
+    "name": "A4 Binder Set",
+    "category": "files-folders",
+    "price": 399,
+    "mrp": 499,
+    "rating": 4.3,
+    "reviews": 36,
+    "badge": "",
+    "featured": false,
+    "stock": 27,
+    "tags": [
+      "binder",
+      "rings",
+      "files",
+      "notes"
+    ],
+    "image": "/images/a4-binders.jpg",
+    "description": "Two ring binders with punched pockets for handouts you still need next semester. Labels on the spine make a shelf easy to scan."
+  },
+  {
+    "id": "sketchbook",
+    "name": "Sketchbook A4",
+    "category": "art-craft",
+    "price": 219,
+    "mrp": 279,
+    "rating": 4.6,
+    "reviews": 88,
+    "badge": "top",
+    "featured": false,
+    "stock": 33,
+    "tags": [
+      "sketch",
+      "art",
+      "drawing",
+      "paper"
+    ],
+    "image": "/images/sketchbook.jpg",
+    "description": "Thick, lightly toothed paper that takes pencil, ink and light watercolour. Eighty sheets, stitched so pages do not fall out."
+  },
+  {
+    "id": "graph-notebook",
+    "name": "Graph Notebook",
+    "category": "notebooks",
+    "price": 139,
+    "mrp": 179,
+    "rating": 4.5,
+    "reviews": 54,
+    "badge": "",
+    "featured": false,
+    "stock": 49,
+    "tags": [
+      "graph",
+      "notebook",
+      "maths",
+      "plots"
+    ],
+    "image": "/images/graph-notebook.jpg",
+    "description": "1 cm graph ruling for plots, circuits and accounting tables. Margins are wide enough for a teacher's remarks."
+  },
+  {
+    "id": "fountain-pen",
+    "name": "Campus Fountain Pen",
+    "category": "writing-tools",
+    "price": 499,
+    "mrp": 649,
+    "rating": 4.7,
+    "reviews": 63,
+    "badge": "popular",
+    "featured": false,
+    "stock": 20,
+    "tags": [
+      "pen",
+      "fountain",
+      "ink",
+      "writing"
+    ],
+    "image": "/images/fountain-pen.jpg",
+    "description": "A smooth medium nib for journals and assignment titles. The converter works with standard bottled ink from the campus store."
+  },
+  {
+    "id": "index-dividers",
+    "name": "Index Dividers",
+    "category": "files-folders",
+    "price": 159,
+    "mrp": 199,
+    "rating": 4.2,
+    "reviews": 29,
+    "badge": "",
+    "featured": false,
+    "stock": 40,
+    "tags": [
+      "dividers",
+      "index",
+      "files",
+      "subjects"
+    ],
+    "image": "/images/index-dividers.jpg",
+    "description": "Ten writable tabs that split a binder by subject or experiment. The card is stiff enough to flip quickly in a viva file."
+  },
+  {
+    "id": "practical-log",
+    "name": "Practical Log Book",
+    "category": "lab-records",
+    "price": 169,
+    "mrp": 219,
+    "rating": 4.6,
+    "reviews": 48,
+    "badge": "",
+    "featured": false,
+    "stock": 37,
+    "tags": [
+      "lab",
+      "log",
+      "practical",
+      "observation"
+    ],
+    "image": "/images/practical-log.jpg",
+    "description": "Numbered pages for aim, apparatus, observation and result. A staff-signature box sits at the foot of every experiment."
+  },
+  {
+    "id": "brush-markers",
+    "name": "Brush Marker Set",
+    "category": "art-craft",
+    "price": 259,
+    "mrp": 329,
+    "rating": 4.4,
+    "reviews": 51,
+    "badge": "",
+    "featured": false,
+    "stock": 26,
+    "tags": [
+      "markers",
+      "brush",
+      "lettering",
+      "art"
+    ],
+    "image": "/images/brush-markers.jpg",
+    "description": "Dual-tip markers for posters, titles and project covers. One end writes a fine line and the other fills a broad stroke."
+  },
+  {
+    "id": "basic-calculator",
+    "name": "Basic Calculator",
+    "category": "calculators",
+    "price": 249,
+    "mrp": 299,
+    "rating": 4.3,
+    "reviews": 44,
+    "badge": "",
+    "featured": false,
+    "stock": 52,
+    "tags": [
+      "calculator",
+      "basic",
+      "accounts"
+    ],
+    "image": "/images/basic-calculator.jpg",
+    "description": "A clear 12-digit desk calculator for accounts, statistics tables and quick checks. Solar and battery power keep it ready in class."
+  },
+  {
+    "id": "exam-pad",
+    "name": "Exam Writing Pad",
+    "category": "notebooks",
+    "price": 89,
+    "mrp": 129,
+    "rating": 4.4,
+    "reviews": 70,
+    "badge": "",
+    "featured": false,
+    "stock": 75,
+    "tags": [
+      "pad",
+      "exam",
+      "ruled",
+      "sheets"
+    ],
+    "image": "/images/exam-pad.jpg",
+    "description": "Forty ruled sheets, punched and light enough for a test booklet. The header leaves space for name, roll number and date."
+  },
+  {
+    "id": "pencil-case",
+    "name": "Pencil Case",
+    "category": "accessories",
+    "price": 149,
+    "mrp": 199,
+    "rating": 4.5,
+    "reviews": 102,
+    "badge": "",
+    "featured": false,
+    "stock": 58,
+    "tags": [
+      "case",
+      "pouch",
+      "pens",
+      "accessories"
+    ],
+    "image": "/images/pencil-case.jpg",
+    "description": "A zip pouch that holds pens, a sharpener and a short ruler without crowding the backpack. The lining is easy to wipe clean."
+  }
+]
