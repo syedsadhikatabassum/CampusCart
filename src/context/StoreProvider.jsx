@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { StoreContext } from "./store";
 import {
@@ -40,6 +40,9 @@ export default function StoreProvider({ children }) {
   const [error, setError] = useState("");
   const [reloadKey, setReloadKey] = useState(0);
   const [user, setUser] = useState(boot.user);
+  const userRef = useRef(boot.user);
+  userRef.current = user;
+  const [authPrompt, setAuthPrompt] = useState(null);
   const [cart, setCart] = useState(boot.bag.cart);
   const [wishlist, setWishlist] = useState(boot.bag.wishlist);
   const [theme, setTheme] = useState(() => {
@@ -118,6 +121,35 @@ export default function StoreProvider({ children }) {
     setReloadKey((value) => value + 1);
   };
 
+  const openAuth = useCallback((prompt = {}) => {
+    setAuthPrompt({
+      mode: prompt.mode === "register" ? "register" : "login",
+      reason: prompt.reason || "login",
+      next: prompt.next || "",
+      pendingAdd: prompt.pendingAdd || null,
+    });
+  }, []);
+
+  const closeAuth = useCallback(() => setAuthPrompt(null), []);
+
+  const withPendingAdd = (currentCart) => {
+    const pending = authPrompt?.pendingAdd;
+    if (!pending) return currentCart;
+    const amount = Math.min(10, Math.max(1, Number(pending.qty) || 1));
+    const found = currentCart.find((item) => item.id === pending.id);
+    if (!found) return [...currentCart, { id: pending.id, qty: amount }];
+    return currentCart.map((item) => (
+      item.id === pending.id ? { ...item, qty: Math.min(10, item.qty + amount) } : item
+    ));
+  };
+
+  const toastPendingAdd = () => {
+    const pending = authPrompt?.pendingAdd;
+    if (!pending) return;
+    const product = products.find((item) => item.id === pending.id);
+    pushToast(product ? `${product.name} added to cart` : "Added to cart");
+  };
+
   const login = (email, password) => {
     const found = findUserByEmail(email);
     if (!found || found.password !== password) {
@@ -126,14 +158,16 @@ export default function StoreProvider({ children }) {
     const guestItems = cart.length;
     const next = {
       ...found,
-      cart: mergeCart(found.cart, cart),
+      cart: withPendingAdd(mergeCart(found.cart, cart)),
       wishlist: sanitizeWishlist([...(found.wishlist || []), ...wishlist]),
     };
     replaceUser(next);
     writeGuest(emptyBag());
     ownerRef.current = next.id;
     const session = beginSession(next);
+    userRef.current = session.publicUser;
     applyBag(session.bag, session.publicUser);
+    toastPendingAdd();
     return { ok: true, name: next.name, merged: guestItems > 0 };
   };
 
@@ -146,7 +180,7 @@ export default function StoreProvider({ children }) {
       email,
       password,
       college,
-      cart,
+      cart: withPendingAdd(cart),
       wishlist,
       budget,
       expenses,
@@ -154,23 +188,33 @@ export default function StoreProvider({ children }) {
     writeGuest(emptyBag());
     ownerRef.current = created.id;
     const session = beginSession(created);
+    userRef.current = session.publicUser;
     applyBag(session.bag, session.publicUser);
+    toastPendingAdd();
     return { ok: true, name: created.name };
   };
 
   const logout = () => {
     ownerRef.current = null;
+    userRef.current = null;
     const guest = endSession();
     applyBag(guest, null);
     pushToast("Signed out");
   };
 
   const addToCart = (id, qty = 1) => {
+    if (!userRef.current) {
+      openAuth({
+        reason: "add",
+        pendingAdd: { id, qty: Math.min(10, Math.max(1, qty)) },
+      });
+      return false;
+    }
     const product = products.find((item) => item.id === id);
     const existing = cart.find((item) => item.id === id);
     if (existing && existing.qty >= 10) {
       pushToast("You can add up to 10 of each item");
-      return;
+      return false;
     }
     setCart((prev) => {
       const found = prev.find((item) => item.id === id);
@@ -182,6 +226,7 @@ export default function StoreProvider({ children }) {
       return [...prev, { id, qty: Math.min(10, Math.max(1, qty)) }];
     });
     pushToast(product ? `${product.name} added to cart` : "Added to cart");
+    return true;
   };
 
   const setQty = (id, qty) => {
@@ -268,6 +313,9 @@ export default function StoreProvider({ children }) {
     error,
     reload,
     user,
+    authPrompt,
+    openAuth,
+    closeAuth,
     login,
     register,
     logout,

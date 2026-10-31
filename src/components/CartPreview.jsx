@@ -4,7 +4,7 @@ import { formatPrice } from "../utils";
 import ProductImage from "./ProductImage";
 
 export default function CartPreview() {
-  const { cartItems, cartCount, cartTotal, loading } = useStore();
+  const { cartItems, cartCount, cartTotal, loading, user, openAuth } = useStore();
   const visible = cartItems.filter((item) => item.product).slice(0, 3);
   const extra = cartItems.filter((item) => item.product).length - visible.length;
 
@@ -37,7 +37,17 @@ export default function CartPreview() {
         <span>Total</span>
         <strong>{formatPrice(cartTotal)}</strong>
       </div>
-      <Link className="btn btn-block" to="/cart">View Cart →</Link>
+      <Link
+        className="btn btn-block"
+        to="/cart"
+        onClick={(event) => {
+          if (user) return;
+          event.preventDefault();
+          openAuth({ reason: "cart", next: "/cart" });
+        }}
+      >
+        View Cart →
+      </Link>
     </section>
   );
 }

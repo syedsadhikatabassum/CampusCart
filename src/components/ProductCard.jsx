@@ -15,7 +15,7 @@ export default function ProductCard({ product }) {
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
   const onAdd = () => {
-    addToCart(product.id, 1);
+    if (!addToCart(product.id, 1)) return;
     setAdded(true);
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => setAdded(false), 1100);

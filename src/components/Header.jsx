@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useStore } from "../context/store";
 import {
   IconCart,
@@ -19,15 +19,31 @@ const LINKS = [
   { to: "/categories", label: "Categories" },
   { to: "/wishlist", label: "Wishlist" },
   { to: "/cart", label: "Cart" },
-  { to: "/about", label: "About" },
 ];
 
 export default function Header() {
-  const { cartCount, wishItems, theme, toggleTheme, user, logout } = useStore();
+  const { cartCount, wishItems, theme, toggleTheme, user, logout, openAuth } = useStore();
   const navigate = useNavigate();
+  const location = useLocation();
   const firstName = user?.name?.split(" ")[0] || "";
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
+
+  const guardCart = (event) => {
+    if (user) return;
+    event.preventDefault();
+    closeMenu();
+    openAuth({ reason: "cart", next: "/cart" });
+  };
+
+  const signOut = () => {
+    const path = location.pathname;
+    closeMenu();
+    logout();
+    if (path === "/account" || path === "/cart" || path === "/checkout") {
+      navigate("/", { replace: true });
+    }
+  };
 
   useEffect(() => {
     if (!open) return undefined;
@@ -44,7 +60,13 @@ export default function Header() {
         <Logo />
         <nav className="desktop-nav" aria-label="Primary">
           {LINKS.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.end} onClick={closeMenu} className={({ isActive }) => (isActive ? "active" : undefined)}>
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.end}
+              onClick={link.to === "/cart" ? guardCart : closeMenu}
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+            >
               {link.label}
             </NavLink>
           ))}
@@ -60,19 +82,25 @@ export default function Header() {
             {theme === "dark" ? <IconSun /> : <IconMoon />}
             <span>{theme === "dark" ? "Light" : "Dark"}</span>
           </button>
-          <NavLink
-            to={user ? "/account" : "/login"}
-            className={({ isActive }) => `user-chip${isActive ? " active" : ""}`}
-            aria-label={user ? `${user.name} account` : "Log in"}
-          >
-            <IconUser />
-            {firstName ? <span className="user-name">{firstName}</span> : null}
-          </NavLink>
+          {user ? (
+            <NavLink
+              to="/account"
+              className={({ isActive }) => `user-chip${isActive ? " active" : ""}`}
+              aria-label={`${user.name} account`}
+            >
+              <IconUser />
+              {firstName ? <span className="user-name">{firstName}</span> : null}
+            </NavLink>
+          ) : (
+            <button type="button" className="login-btn" onClick={() => openAuth({ reason: "login" })}>
+              Log in
+            </button>
+          )}
           <NavLink to="/wishlist" className={({ isActive }) => `icon-btn${isActive ? " active" : ""}`} aria-label="Wishlist">
             <IconHeart filled={wishItems.length > 0} />
             {wishItems.length > 0 ? <span className="badge-count">{wishItems.length}</span> : null}
           </NavLink>
-          <NavLink to="/cart" className={({ isActive }) => `icon-btn${isActive ? " active" : ""}`} aria-label="Cart">
+          <NavLink to="/cart" onClick={guardCart} className={({ isActive }) => `icon-btn${isActive ? " active" : ""}`} aria-label="Cart">
             <IconCart />
             {cartCount > 0 ? <span className="badge-count">{cartCount}</span> : null}
           </NavLink>
@@ -93,23 +121,34 @@ export default function Header() {
       {open ? (
         <nav className="mobile-panel" aria-label="Mobile">
           {LINKS.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.end} onClick={closeMenu} className={({ isActive }) => (isActive ? "active" : undefined)}>
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.end}
+              onClick={link.to === "/cart" ? guardCart : closeMenu}
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+            >
               {link.label}
             </NavLink>
           ))}
-          <NavLink to={user ? "/account" : "/login"} onClick={closeMenu} className={({ isActive }) => (isActive ? "active" : undefined)}>
-            {user ? "Your details" : "Log in"}
-          </NavLink>
           {user ? (
+            <NavLink to="/account" onClick={closeMenu} className={({ isActive }) => (isActive ? "active" : undefined)}>
+              Your details
+            </NavLink>
+          ) : (
             <button
               type="button"
-              className="menu-logout"
+              className="menu-link"
               onClick={() => {
                 closeMenu();
-                logout();
-                navigate("/login", { replace: true });
+                openAuth({ reason: "login" });
               }}
             >
+              Log in
+            </button>
+          )}
+          {user ? (
+            <button type="button" className="menu-logout" onClick={signOut}>
               Sign out
             </button>
           ) : null}

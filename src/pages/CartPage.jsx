@@ -1,17 +1,32 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { useStore } from "../context/store";
 import { usePageTitle } from "../hooks/usePageTitle";
 import EmptyState from "../components/EmptyState";
+import LoginPrompt from "../components/LoginPrompt";
 import ProductImage from "../components/ProductImage";
 import QtyControl from "../components/QtyControl";
 import { FREE_SHIPPING_AT, formatPrice, shippingFee } from "../utils";
 
 export default function CartPage() {
   const { cartItems, cartTotal, setQty, removeFromCart, user } = useStore();
+  const [arrivedLoggedOut] = useState(() => !user);
   usePageTitle("Cart");
   const fee = shippingFee(cartTotal);
   const payable = cartTotal + fee;
   const away = Math.max(0, FREE_SHIPPING_AT - cartTotal);
+
+  if (!user && !arrivedLoggedOut) return <Navigate to="/" replace />;
+  if (!user) {
+    return (
+      <LoginPrompt
+        title="Log in now"
+        text="Sign in or register to open your cart."
+        reason="cart"
+        next="/cart"
+      />
+    );
+  }
 
   return (
     <div className="page">

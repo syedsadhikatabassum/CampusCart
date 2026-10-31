@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useStore } from "../context/store";
 import { usePageTitle } from "../hooks/usePageTitle";
+import LoginPrompt from "../components/LoginPrompt";
 import { formatPrice } from "../utils";
 
 function placedLabel(value) {
@@ -13,15 +14,27 @@ function placedLabel(value) {
 export default function AccountPage() {
   const { profile, setProfile, user, logout, orders } = useStore();
   const navigate = useNavigate();
-  const [leaving, setLeaving] = useState(false);
+  const [arrivedLoggedOut] = useState(() => !user);
   const [form, setForm] = useState(profile);
   const [saved, setSaved] = useState(false);
   const [errors, setErrors] = useState({});
   usePageTitle("Your profile");
 
+  useEffect(() => {
+    if (!user) return;
+    setForm(profile);
+  }, [user, profile]);
+
+  if (!user && !arrivedLoggedOut) return <Navigate to="/" replace />;
   if (!user) {
-    if (leaving) return null;
-    return <Navigate to="/login?next=/account" replace />;
+    return (
+      <LoginPrompt
+        title="Log in"
+        text="Sign in or register to view your profile."
+        reason="login"
+        next="/account"
+      />
+    );
   }
 
   const setField = (key) => (event) => {
@@ -79,9 +92,8 @@ export default function AccountPage() {
               className="btn btn-ghost"
               type="button"
               onClick={() => {
-                setLeaving(true);
                 logout();
-                navigate("/login", { replace: true });
+                navigate("/", { replace: true });
               }}
             >
               Sign out

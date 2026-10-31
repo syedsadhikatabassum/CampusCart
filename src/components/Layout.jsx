@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import AuthModal from "./AuthModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import ScrollManager from "./ScrollManager";
@@ -14,6 +15,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <AuthModal />
       <Toaster />
     </>
   );

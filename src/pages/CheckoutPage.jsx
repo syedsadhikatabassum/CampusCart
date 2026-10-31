@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useStore } from "../context/store";
 import { usePageTitle } from "../hooks/usePageTitle";
 import EmptyState from "../components/EmptyState";
+import LoginPrompt from "../components/LoginPrompt";
 import { IconCheck } from "../components/Icons";
 import { formatPrice, shippingFee } from "../utils";
 
@@ -19,6 +20,7 @@ const EMPTY = {
 
 export default function CheckoutPage() {
   const { cartItems, cartTotal, clearCart, profile, setProfile, user, saveOrder } = useStore();
+  const [arrivedLoggedOut] = useState(() => !user);
   const [form, setForm] = useState({
     ...EMPTY,
     name: profile.name,
@@ -30,6 +32,17 @@ export default function CheckoutPage() {
   const [order, setOrder] = useState(null);
   usePageTitle("Checkout");
 
+  useEffect(() => {
+    if (!user) return;
+    setForm((current) => ({
+      ...current,
+      name: profile.name,
+      email: profile.email || user.email,
+      phone: profile.phone,
+      college: profile.college,
+    }));
+  }, [user, profile]);
+
   const fee = shippingFee(cartTotal);
   const payable = cartTotal + fee;
 
@@ -37,7 +50,17 @@ export default function CheckoutPage() {
     setForm((current) => ({ ...current, [key]: event.target.value }));
   };
 
-  if (!user) return <Navigate to="/login?next=/checkout" replace />;
+  if (!user && !arrivedLoggedOut) return <Navigate to="/" replace />;
+  if (!user) {
+    return (
+      <LoginPrompt
+        title="Log in now"
+        text="Sign in or register to check out."
+        reason="checkout"
+        next="/checkout"
+      />
+    );
+  }
 
   if (order) {
     return (
